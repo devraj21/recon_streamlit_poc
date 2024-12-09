@@ -12,6 +12,7 @@ services:
       - ./app:/app
       - ./logs:/app/logs
       - ./outputs:/app/outputs
+      - ./assets:/app/assets:ro
     env_file:
       - .env
     environment:

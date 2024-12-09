@@ -23,8 +23,11 @@ LABEL description="Streamlit reconciliation application with file upload capabil
 WORKDIR /app
 
 # Create necessary directories
-RUN mkdir -p /app/logs /app/outputs && \
-    chmod -R 777 /app/logs /app/outputs
+RUN mkdir -p /app/logs /app/outputs app/assets && \
+    chmod -R 777 /app/logs /app/outputs app/assets
+
+# Copy assets first
+COPY assets/ /app/assets/
 
 # Copy requirements first (better caching)
 COPY app/requirements.txt .
@@ -35,6 +38,7 @@ RUN pip install --upgrade pip \
 
 # Copy the application code
 COPY app/ .
+#COPY app/assets/facct_icon.svg ./app/assets/
 
 # Expose port 8501 (Streamlit's default port)
 EXPOSE 8501
